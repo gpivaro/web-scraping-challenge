@@ -136,7 +136,7 @@ for i in range(len(list_hemispheres)):
     # Use the browser to visit the url
     browser.visit(url_mars_hemispheres)
 
-hemisphere_image_urls
+print(hemisphere_image_urls)
 
 
 # When you’ve finished testing, close your browser using browser.quit:
