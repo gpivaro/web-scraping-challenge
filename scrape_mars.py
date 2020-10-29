@@ -34,12 +34,15 @@ def scrape():
     soup = BeautifulSoup(html_nasa, "html.parser")
 
     # Print the li that contatins the first headline
-    results = soup.find("li", class_="slide")
+    # results = soup.find("div", class_="content_title")
+    results = soup.find_all("div", class_="content_title")
 
     # Assign the text to variables that you can reference later
-    news_title = results.find("h3").text
+    # news_title = results.a.text
+    news_title = results[1].text
     print(f"Title: {news_title}\n")
 
+    results = soup.find('li', class_="slide")
     news_p = results.find("div", class_="article_teaser_body").text
     print(f"{news_p}")
 
