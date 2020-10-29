@@ -3,20 +3,46 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Hot Finds</title>
+    <title>Project - Mission to Mars</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 
 <body>
     <div class="container">
         <div class="jumbotron text-center">
-            <h1>Hot Finds On Craigslist</h1>
-            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Where them bikes at?!</a></p>
+            <h1>Mission to Mars</h1>
+            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
         </div>
         <div class="row" id="craiglist-listings">
-            <div class="col-md-12">
-                <p>{{ data_db }}
-                </p>
+            <div class="col">
+                <h1>Latest Mars News</h1>
+                {% for data in data_db %}
+                <h5>{{ data.Title }}</h5>
+                <p>{{ data.Paragraph }}</p>
+                {% endfor %}
+                <br />
+
+
+                <h1>Featured Mars Image</h1>
+                <div class="col-md-8">
+                    {% for data in data_db %}
+                    <img src="{{ data.ImageURL }}">
+                    {% endfor %}
+                </div>
+
+                <div class="table-responsive">
+                    {% for data in table %}
+                    {{ data.TableHTML }}
+                    {% endfor %}
+                </div>
+
+                {% for data in images %}
+                <img src="{{ data.img_url }}">
+
+                <p>{{data.img_url}}</p>
+                <p>{{data.title}}</p>
+                {% endfor %}
+
             </div>
         </div>
     </div>

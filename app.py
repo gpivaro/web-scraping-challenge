@@ -20,7 +20,12 @@ mars_data = mongo.db.mars_data
 @app.route("/")
 def index():
     mars_info = list(mars_data.find())
-    return render_template("index.html", data_db=mars_info)
+    print("------------------")
+    print("------------------")
+    print(mars_info[0])
+    print("------------------")
+    print(type(mars_info))
+    return render_template("index.html", data_db=mars_info, table=mars_info[2],images=mars_info[3]['ListImages'])
     # return mars_info
     # return "Hello World"
 
@@ -29,6 +34,9 @@ def index():
 # send us back to the index route to render the results
 @app.route("/scrape")
 def scraper():
+
+    # drop collection
+    mars_data.drop()
 
     # scrape_craigslist.scrape() is a custom function that
     # we've defined in the scrape_mars.py file within this directory

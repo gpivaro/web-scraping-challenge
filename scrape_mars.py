@@ -136,13 +136,13 @@ def scrape():
 
         # Append the dictionary with the image url string and the hemisphere title to a list.
         for n in range(len(results_new)):
-            if results_new[n].a.text == "Original":
+            if results_new[n].a.text == "Sample":
                 hemisphere_image_urls.append(
                     {
                         "title": list_hemispheres[i].replace(
                             "Hemisphere Enhanced", "Hemisphere"
                         ),
-                        "img_url": results_new[1].a["href"],
+                        "img_url": results_new[0].a["href"],
                     }
                 )
 
