@@ -13,6 +13,9 @@ def scrape():
     executable_path = {"executable_path": driverPath[0]}
     browser = Browser("chrome", **executable_path, headless=True)
 
+    # Create a empty dictionary to store the data
+    scraped_data = {}
+
     ######################     NASA  ########################
     # URL of page to be scraped
     # url_nasa = "https://mars.nasa.gov/news/"
@@ -21,15 +24,14 @@ def scrape():
     # Use the browser to visit the url
     browser.visit(url_nasa)
 
+    # Wait for 5 seconds for error purpouses to load the page
+    time.sleep(5)
+
     # Return the rendered page by the browser
     html_nasa = browser.html
 
     # Use beatifulsoup to scrap the page rendered by the browser
     soup = BeautifulSoup(html_nasa, "html.parser")
-
-    # Wait for 300 milliseconds for error purpouses
-    # .3 can also be used
-    time.sleep(5)
 
     # Search for the div where the title is located
     results = soup.find_all("div", class_="content_title")
@@ -42,8 +44,12 @@ def scrape():
     # print(f"Paragraph: {new_p}")
 
     # Create a dictionary with the scraped data
-    Nasa_News = {"Title": news_title, "Paragraph": new_p}
+    # Nasa_News = {"Title": news_title, "Paragraph": new_p}
     # Nasa_News
+
+    # Save the scraped data to an entry of the dictionary
+    scraped_data["Title"] = news_title
+    scraped_data["Paragraph"] = new_p
 
     ################## JPL Mars Space Images - Featured Image  ##################
     # URL for JPL Nasa websit
@@ -80,8 +86,11 @@ def scrape():
     # print(featured_image_url)
 
     # Create a dictionary with the scraped data
-    JPL = {"ImageURL": featured_image_url}
+    # JPL = {"ImageURL": featured_image_url}
     # JPL
+
+    # Save the scraped data to an entry of the dictionary
+    scraped_data["ImageURL"] = featured_image_url
 
     ################## Mars Facts ##################
     # URL
@@ -92,13 +101,19 @@ def scrape():
 
     # Select the intended table
     table_facts = tables[0]
-    html_table = table_facts.to_html()
-    # print(html_table)
-    # table_facts.to_html('table.html')
+
+    # Rename the table colums
+    table_facts.rename(columns={0: "Ind", 1: "Data"}, inplace=True)
+
+    # Set the index to column 0 and format as dictionary
+    table_dict = table_facts.set_index("Ind").to_dict()
 
     # Create a dictionary with the scraped data
-    MarsFacts = {"TableHTML": html_table}
+    MarsFacts = {"TableHTML": table_dict}
     # MarsFacts
+
+    # Save the scraped data to an entry of the dictionary
+    scraped_data["TableHTML"] = table_dict
 
     ################# Mars Hemispheres #################
     # URL
@@ -153,17 +168,20 @@ def scrape():
     USGS = {"ListImages": hemisphere_image_urls}
     USGS
 
+    # Save the scraped data to an entry of the dictionary
+    scraped_data["ListImages"] = hemisphere_image_urls
+
     # When you’ve finished testing, close your browser using browser.quit:
     browser.quit()
 
     # Create a list of all dictionaries with the scraped data
-    scraped_data = [Nasa_News, JPL, MarsFacts, USGS]
+    # scraped_data = [Nasa_News, JPL, MarsFacts, USGS]
 
     return scraped_data
 
 
-# data = scrape()
-# print()
-# print()
-# print(data)
-# print()
+data = scrape()
+print()
+print()
+print(data)
+print()

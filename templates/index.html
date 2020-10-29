@@ -13,33 +13,29 @@
             <h1>Mission to Mars</h1>
             <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
         </div>
+
+
+
         <div class="row" id="craiglist-listings">
             <div class="col">
                 <h1>Latest Mars News</h1>
-                {% for data in data_db %}
-                <h5>{{ data.Title }}</h5>
-                <p>{{ data.Paragraph }}</p>
-                {% endfor %}
+                <h5>{{ data_db.Title }}</h5>
+                <p>{{ data_db.Paragraph }}</p>
                 <br />
 
 
                 <h1>Featured Mars Image</h1>
                 <div class="col-md-8">
-                    {% for data in data_db %}
-                    <img src="{{ data.ImageURL }}">
-                    {% endfor %}
+                    <img src="{{ data_db.ImageURL }}">
                 </div>
 
                 <div class="table-responsive">
-                    {% for data in table %}
-                    {{ data.TableHTML }}
-                    {% endfor %}
+                    {{ data_db.TableHTML }}
                 </div>
 
-                {% for data in images %}
-                <img src="{{ data.img_url }}">
 
-                <p>{{data.img_url}}</p>
+                {% for data in data_db.ListImages %}
+                <img src="{{ data.img_url }}">
                 <p>{{data.title}}</p>
                 {% endfor %}
 
