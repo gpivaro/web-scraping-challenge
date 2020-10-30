@@ -18,8 +18,8 @@ def scrape():
 
     ######################     NASA  ########################
     # URL of page to be scraped
-    # url_nasa = "https://mars.nasa.gov/news/"
-    url_nasa = "https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest"
+    url_nasa = "https://mars.nasa.gov/news/"
+    # url_nasa = "https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest"
 
     # Use the browser to visit the url
     browser.visit(url_nasa)
@@ -42,10 +42,6 @@ def scrape():
     results = soup.find_all("div", class_="article_teaser_body")
     new_p = results[0].text
     # print(f"Paragraph: {new_p}")
-
-    # Create a dictionary with the scraped data
-    # Nasa_News = {"Title": news_title, "Paragraph": new_p}
-    # Nasa_News
 
     # Save the scraped data to an entry of the dictionary
     scraped_data["Title"] = news_title
@@ -85,10 +81,6 @@ def scrape():
     featured_image_url = f"{url_jpl}{image_location}"
     # print(featured_image_url)
 
-    # Create a dictionary with the scraped data
-    # JPL = {"ImageURL": featured_image_url}
-    # JPL
-
     # Save the scraped data to an entry of the dictionary
     scraped_data["ImageURL"] = featured_image_url
 
@@ -107,16 +99,6 @@ def scrape():
 
     # Rename the table colums
     table_facts = table_facts.set_index("Ind")
-
-    # Set the index to column 0 and format as dictionary
-    # table_dict = table_facts.set_index("Ind").to_dict()
-
-    # Create a dictionary with the scraped data
-    # MarsFacts = {"TableHTML": table_dict}
-    # MarsFacts
-
-    # # Save the scraped data to an entry of the dictionary
-    # scraped_data["TableHTML"] = table_dict
 
     # Save the scraped data to an entry of the dictionary
     scraped_data["TableHTML"] = table_facts.to_html()
@@ -180,14 +162,4 @@ def scrape():
     # When you’ve finished testing, close your browser using browser.quit:
     browser.quit()
 
-    # Create a list of all dictionaries with the scraped data
-    # scraped_data = [Nasa_News, JPL, MarsFacts, USGS]
-
     return scraped_data
-
-
-data = scrape()
-print()
-print()
-print(data)
-print()

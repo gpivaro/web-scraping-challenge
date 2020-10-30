@@ -14,43 +14,53 @@
             <h1>Mission to Mars</h1>
             <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
         </div>
-
-
-
-        <div class="row" id="craiglist-listings">
-            <div class="col">
-                <h1>Latest Mars News</h1>
-                <h5>{{ data_db.Title }}</h5>
+    </div>
+    <!-- Main -->
+    <div class="container">
+        <div class="row">
+            <h3>Latest Mars News</h3>
+            <div class="row">
+                <h6>{{ data_db.Title }}</h6>
                 <p>{{ data_db.Paragraph }}</p>
-                <br />
-
-
-
-
-
-
+            </div>
+            <div class="col-lg-8 summary">
+                <h3>Featured Mars Image</h3>
+                <img class="img-fluid" src="{{ data_db.ImageURL }}" style="width:100%">
+            </div>
+            <div class="col-lg-4 visualization">
                 <div class=“container col-lg-4 col-md-4 “>
-                    <h3 style=“margin-top: 10px;“>Mars Facts</h3>
+                    <h5 style=“margin-top: 10px;“>Mars Facts</h5>
                     <div style=“max-width: 450px; max-height: 100px; font-size: 15px; margin-bottom: 50px;” class=“table
                         table-striped”>
                         {{ data_db.TableHTML|safe}}
                     </div>
                 </div>
-
-
-                <h1>Featured Mars Image</h1>
-                <div class="col-md-8">
-                    <img src="{{ data_db.ImageURL }}">
+            </div>
+        </div>
+    </div>
+    <!-- Main -->
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="col visualization">
+                    <article>
+                        <h3>Mars Hemispheres</h3>
+                        <hr>
+                        <!-- <div class="borderbox"> -->
+                        <div class="container">
+                            {% for data in data_db.ListImages %}
+                            <div class="row">
+                                <div class="col">
+                                    <img class="img-fluid" src="{{ data.img_url }}" style="width:100%">
+                                    <br /><br />
+                                    <p>{{data.title}}</p>
+                                    <br />
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </article>
                 </div>
-
-
-
-
-                {% for data in data_db.ListImages %}
-                <img src="{{ data.img_url }}">
-                <p>{{data.title}}</p>
-                {% endfor %}
-
             </div>
         </div>
     </div>
