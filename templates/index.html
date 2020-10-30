@@ -12,13 +12,14 @@
     <div class="container">
         <div class="jumbotron text-center">
             <h1>Mission to Mars</h1>
-            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+            <br />
+            <a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a>
         </div>
     </div>
     <!-- Main -->
     <div class="container">
         <div class="row">
-            <h3>Latest Mars News</h3>
+            <h3 id="headline">Latest Mars News</h3>
             <div class="row">
                 <h6>{{ data_db.Title }}</h6>
                 <p>{{ data_db.Paragraph }}</p>
@@ -29,10 +30,11 @@
             </div>
             <div class="col-lg-4 visualization">
                 <div class=“container col-lg-4 col-md-4 “>
-                    <h5 style=“margin-top: 10px;“>Mars Facts</h5>
-                    <div style=“max-width: 450px; max-height: 100px; font-size: 15px; margin-bottom: 50px;” class=“table
-                        table-striped”>
-                        {{ data_db.TableHTML|safe}}
+                    <h5>Mars Facts</h5>
+                    <div class="table-responsive">
+                        <div class="table table-striped">
+                            {{ data_db.TableHTML|safe}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -44,7 +46,7 @@
             <div class="col">
                 <div class="col visualization">
                     <article>
-                        <h3>Mars Hemispheres</h3>
+                        <h3 id="hemisphere">Mars Hemispheres</h3>
                         <hr>
                         <!-- <div class="borderbox"> -->
                         <div class="container">

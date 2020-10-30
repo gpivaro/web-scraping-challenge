@@ -19,7 +19,6 @@ def scrape():
     ######################     NASA  ########################
     # URL of page to be scraped
     url_nasa = "https://mars.nasa.gov/news/"
-    # url_nasa = "https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest"
 
     # Use the browser to visit the url
     browser.visit(url_nasa)
@@ -66,7 +65,6 @@ def scrape():
 
     # Featured image is in the div class="carousel_container"
     results = soup.find("div", class_="carousel_container")
-    # print(results)
 
     # Find the article
     article = results.find("article")
@@ -79,7 +77,6 @@ def scrape():
 
     # Compose the full url of the image
     featured_image_url = f"{url_jpl}{image_location}"
-    # print(featured_image_url)
 
     # Save the scraped data to an entry of the dictionary
     scraped_data["ImageURL"] = featured_image_url
@@ -151,10 +148,6 @@ def scrape():
 
         # Use the browser to visit the url
         browser.visit(url_mars_hemispheres)
-
-    # Create a dictionary with the scraped data
-    USGS = {"ListImages": hemisphere_image_urls}
-    USGS
 
     # Save the scraped data to an entry of the dictionary
     scraped_data["ListImages"] = hemisphere_image_urls
