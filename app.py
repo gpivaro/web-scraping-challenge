@@ -20,11 +20,6 @@ mars_data = mongo.db.mars_data
 @app.route("/")
 def index():
     mars_info = mars_data.find_one()
-    print("------------------")
-    print("------------------")
-    print(mars_info)
-    print("------------------")
-    print(type(mars_info))
 
     return render_template("index.html", data_db=mars_info)
 

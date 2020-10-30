@@ -105,15 +105,21 @@ def scrape():
     # Rename the table colums
     table_facts.rename(columns={0: "Ind", 1: "Data"}, inplace=True)
 
+    # Rename the table colums
+    table_facts = table_facts.set_index("Ind")
+
     # Set the index to column 0 and format as dictionary
-    table_dict = table_facts.set_index("Ind").to_dict()
+    # table_dict = table_facts.set_index("Ind").to_dict()
 
     # Create a dictionary with the scraped data
-    MarsFacts = {"TableHTML": table_dict}
+    # MarsFacts = {"TableHTML": table_dict}
     # MarsFacts
 
+    # # Save the scraped data to an entry of the dictionary
+    # scraped_data["TableHTML"] = table_dict
+
     # Save the scraped data to an entry of the dictionary
-    scraped_data["TableHTML"] = table_dict
+    scraped_data["TableHTML"] = table_facts.to_html()
 
     ################# Mars Hemispheres #################
     # URL
